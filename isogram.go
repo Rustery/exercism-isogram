@@ -1,15 +1,21 @@
+// Package isogram is Exercism.io exercise
 package isogram
 
-func IsIsogram(input string) bool {
-	var result bool = true
+import (
+	"strings"
+	"unicode"
+)
 
-	for _, v := range input {
-		for _, vv := range input {
-			if v == vv {
-				result = false
-			}
+// IsIsogram — Determine if a word or phrase is an isogram.
+func IsIsogram(input string) bool {
+	lowInput := strings.ToLower(input)
+	for _, v := range lowInput {
+		if !unicode.IsLetter(v) {
+			continue
+		}
+		if strings.Count(lowInput, string(v)) > 1 {
+			return false
 		}
 	}
-
-	return result
+	return true
 }
