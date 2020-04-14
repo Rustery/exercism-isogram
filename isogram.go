@@ -9,13 +9,15 @@ import (
 // IsIsogram — Determine if a word or phrase is an isogram.
 func IsIsogram(input string) bool {
 	lowInput := strings.ToLower(input)
+	readed := make(map[rune]bool)
 	for _, v := range lowInput {
 		if !unicode.IsLetter(v) {
 			continue
 		}
-		if strings.Count(lowInput, string(v)) > 1 {
+		if readed[v] {
 			return false
 		}
+		readed[v] = true
 	}
 	return true
 }
